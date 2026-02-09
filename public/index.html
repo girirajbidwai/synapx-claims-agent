@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synapx | Autonomous ACORD Processing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="glow-bg"></div>
+
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="icon">⚡</span>
+                <h1>SYNAPX</h1>
+            </div>
+            <p class="tagline">Next-Gen Autonomous Claims Processing Agent</p>
+        </header>
+
+        <main>
+            <!-- Input Section -->
+            <section class="card input-card">
+                <div class="card-header">
+                    <h2>Claim Document Content</h2>
+                    <div class="header-actions">
+                        <button id="loadSampleBtn" class="text-btn">Load ACORD Sample</button>
+                        <span class="status-pill blue">Ready</span>
+                    </div>
+                </div>
+                <p class="instruction">Upload raw text or paste ACORD 80 form content for classification.</p>
+
+                <textarea id="claimInput" placeholder="Paste claim document text here..."></textarea>
+
+                <div class="action-bar">
+                    <button id="processBtn" class="premium-btn">
+                        <span class="btn-text">Process Document</span>
+                        <div class="loader-ring"></div>
+                    </button>
+                    <button id="clearBtn" class="secondary-btn">Clear</button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <div id="resultArea" class="hidden">
+                <section class="card result-card">
+                    <div class="routing-summary">
+                        <div class="route-info">
+                            <label>Recommended Routing</label>
+                            <h3 id="recommendRoute">---</h3>
+                        </div>
+                        <div class="reasoning">
+                            <label>Agent Reasoning</label>
+                            <p id="reasoningText"></p>
+                        </div>
+                    </div>
+
+                    <!-- Alerts -->
+                    <div id="alertContainer" class="hidden">
+                        <div id="missingFieldsSection" class="alert-box danger hidden">
+                            <strong>Missing Mandatory Fields:</strong>
+                            <div id="missingFieldsList" class="pill-cloud red"></div>
+                        </div>
+                        <div id="inconsistentSection" class="alert-box warning hidden">
+                            <strong>Inconsistencies Detected:</strong>
+                            <div id="inconsistentList" class="pill-cloud gold"></div>
+                        </div>
+                    </div>
+
+                    <div class="extracted-data">
+                        <div class="data-header">
+                            <h3>Extracted Entities</h3>
+                            <button class="export-btn">JSON Output</button>
+                        </div>
+
+                        <div class="data-grid">
+                            <!-- Policy -->
+                            <div class="data-group">
+                                <h4><span class="dot p"></span> Policy Details</h4>
+                                <div class="field"><label>Policy Number</label><span id="val_policy"></span></div>
+                                <div class="field"><label>Policyholder</label><span id="val_holder"></span></div>
+                                <div class="field"><label>Effective Dates</label><span id="val_dates"></span></div>
+                            </div>
+                            <!-- Loss -->
+                            <div class="data-group">
+                                <h4><span class="dot l"></span> Loss & Incident</h4>
+                                <div class="field"><label>Date & Time</label><span id="val_loss_dt"></span></div>
+                                <div class="field"><label>Location</label><span id="val_loss_loc"></span></div>
+                                <div class="field"><label>Claim Type</label><span id="val_type"></span></div>
+                            </div>
+                            <!-- Parties -->
+                            <div class="data-group">
+                                <h4><span class="dot pt"></span> Involved Parties</h4>
+                                <div class="field"><label>Claimant</label><span id="val_claimant"></span></div>
+                                <div class="field"><label>Third Party Info</label><span id="val_third"></span></div>
+                                <div class="field"><label>Contact</label><span id="val_contact"></span></div>
+                            </div>
+                            <!-- Asset -->
+                            <div class="data-group">
+                                <h4><span class="dot a"></span> Asset & Financials</h4>
+                                <div class="field"><label>Asset ID (VIN)</label><span id="val_vin"></span></div>
+                                <div class="field"><label>Damage Estimate</label><span id="val_estimate"
+                                        class="price"></span></div>
+                                <div class="field"><label>Initial Est.</label><span id="val_initial_est"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="incident-desc-box">
+                            <label>Accident Description</label>
+                            <p id="val_desc"></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
